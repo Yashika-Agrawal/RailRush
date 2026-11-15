@@ -17,10 +17,15 @@ const THEME_STORAGE_KEY = 'railrush_theme';
 const CALM_STORAGE_KEY = 'railrush_calm_mode';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Default is dark ("Night Service") per design system specification
   const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'dark';
     const saved = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
     if (saved === 'light' || saved === 'dark') return saved;
+    // Check system preference if no explicit saved choice
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    }
+    // Default is Night Service (Dark)
     return 'dark';
   });
 
