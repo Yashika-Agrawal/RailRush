@@ -1,0 +1,35 @@
+:root {
+  /* Motion Durations */
+  --dur-instant: 80ms;   /* Press feedback */
+  --dur-fast: 140ms;      /* Hover, focus, dropdowns */
+  --dur-base: 220ms;      /* Cards, dialogs, toasts */
+  --dur-slow: 400ms;      /* Page and panel transitions */
+  --dur-route: 1100ms;    /* Route line draw-in, timeline fill */
+
+  /* Motion Easings */
+  --ease-depart: cubic-bezier(0.2, 0, 0, 1);       /* Quick start, long settle (entering/moving) */
+  --ease-arrive: cubic-bezier(0.3, 0, 0.8, 0.15);  /* Elements leaving */
+  --ease-glide: cubic-bezier(0.4, 0, 0.2, 1);      /* Colour and opacity changes */
+}
+
+/* Reduced Motion overrides per design system specifications */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-calm-mode="true"] {
+    --dur-instant: 0ms;
+    --dur-fast: 80ms;
+    --dur-base: 80ms;
+    --dur-slow: 80ms;
+    --dur-route: 0ms;
+    --bg-parallax: 0;
+  }
+}
+
+/* In-app Calm Mode support */
+[data-calm-mode="true"] {
+  --dur-instant: 0ms;
+  --dur-fast: 80ms;
+  --dur-base: 80ms;
+  --dur-slow: 80ms;
+  --dur-route: 0ms;
+  --bg-parallax: 0;
+}

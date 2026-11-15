@@ -1,0 +1,39 @@
+@import './design/tokens/primitives.css';
+@import './design/tokens/theme-light.css';
+@import './design/tokens/theme-dark.css';
+@import './design/tokens/motion.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Timetable / Railway numbers standard */
+  .font-data, code, kbd, samp, pre {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums slashed-zero;
+  }
+
+  /* Tick scale sleeper pattern motif */
+  .tick-divider {
+    height: 6px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--color-border-strong) 0px,
+      var(--color-border-strong) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+  }
+}

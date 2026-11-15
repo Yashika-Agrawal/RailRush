@@ -1,0 +1,50 @@
+/* Default is Night Service (Dark) as defined by the design system */
+:root, [data-theme="dark"] {
+  /* Surfaces */
+  --color-bg: var(--primitive-navy-950);           /* #0A111F */
+  --color-raised: var(--primitive-navy-900);       /* #0F1829 */
+  --color-surface-1: var(--primitive-navy-850);     /* #131E33 */
+  --color-surface-2: var(--primitive-navy-800);     /* #19273F */
+  --color-surface-3: var(--primitive-navy-750);     /* #20314E */
+
+  /* Text */
+  --color-text: var(--primitive-navy-100);         /* #EAF0F8 (16.5:1) */
+  --color-text-2: var(--primitive-navy-200);       /* #AAB7CD (9.3:1) */
+  --color-text-3: var(--primitive-navy-300);       /* #7F8FAB (5.8:1) */
+  --color-text-disabled: var(--primitive-navy-500);/* #55647F */
+
+  /* Borders */
+  --color-border: var(--primitive-navy-700);        /* #2B3C5C (subtle) */
+  --color-border-strong: var(--primitive-navy-400); /* #5B6F96 (3.3:1 on surface 1) */
+
+  /* Action & Accent */
+  --color-action: var(--primitive-cyan-signal-dark);        /* #2DB9CE (8.0:1) */
+  --color-action-hover: var(--primitive-cyan-signal-dark-hover); /* #52CADB */
+  --color-on-action: #04202A;                      /* 7.2:1 on dark cyan */
+  --color-accent: var(--primitive-lantern-dark);            /* #E08A63 (7.2:1) */
+  --color-focus: var(--primitive-cyan-signal-dark);
+
+  /* Ticket (always ivory) */
+  --color-ticket: var(--primitive-ticket-ivory);            /* #F1E7CF */
+  --color-ticket-ink: var(--primitive-ticket-ink);          /* #1B1A17 */
+
+  /* Semantic feedback */
+  --color-secondary: var(--primitive-sage-dark);            /* #8FBF9F */
+  --color-success: var(--primitive-success-dark);           /* #3DD68C (10.1:1) */
+  --color-warning: var(--primitive-warning-dark);           /* #F5B03A (10.0:1) */
+  --color-error: var(--primitive-error-dark);               /* #F2605C (5.9:1) */
+  --color-info: var(--primitive-info-dark);                 /* #5AA9F5 (7.6:1) */
+
+  /* Floating shadow & top highlight for dark mode depth */
+  --shadow-float: 0 12px 32px rgba(2, 6, 16, 0.45);
+  --shadow-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* Canvas background treatment (Dark) */
+  --bg-line: rgba(45, 185, 206, 0.12);
+  --bg-node: rgba(82, 202, 219, 0.35);
+  --bg-train: rgba(241, 231, 207, 0.80);
+  --bg-opacity-default: 1;
+  --bg-opacity-dense: 0.6;
+  --bg-parallax: 0.08;
+  --bg-fps: 30;
+}
