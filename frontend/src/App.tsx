@@ -1,188 +1,186 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from './design/theme/ThemeProvider';
 import { RouteNetwork } from './design/background/RouteNetwork';
-import { Button, Card, StatusPill } from './design/components/ui';
+import {
+  Button,
+  Card,
+  Input,
+  StatusPill,
+  RouteTimeline,
+} from './design/components/ui';
 
 export const App: React.FC = () => {
   const { theme, toggleTheme, calmMode, toggleCalmMode } = useTheme();
-
-  const stages = [
-    {
-      step: '01',
-      title: 'Git Sync',
-      tag: 'Source',
-      cmd: 'git pull origin main',
-      detail: 'Pulls latest commit to self-hosted workspace',
-    },
-    {
-      step: '02',
-      title: 'Dependencies',
-      tag: 'NPM',
-      cmd: 'npm ci',
-      detail: 'Installs dependencies strictly from lockfile',
-    },
-    {
-      step: '03',
-      title: 'Production Build',
-      tag: 'Vite / React',
-      cmd: 'npm run build',
-      detail: 'Compiles TypeScript & bundles production assets',
-    },
-    {
-      step: '04',
-      title: 'Nginx Deploy',
-      tag: 'Nginx / Linux',
-      cmd: 'sudo systemctl reload nginx',
-      detail: 'Copies build to /var/www/railrush/ & triggers Nginx reload',
-    },
-  ];
-
-  const specs = [
-    { label: 'Host System', val: 'Ubuntu Linux', sub: 'Dedicated machine' },
-    { label: 'Runner Type', val: 'Self-Hosted', sub: 'GitHub Actions runner' },
-    { label: 'Trigger Event', val: 'push [main]', sub: 'Push trigger' },
-    { label: 'Web Server', val: 'Nginx', sub: 'Reverse proxy & static host' },
-  ];
+  const [btnLoading, setBtnLoading] = useState(false);
 
   return (
-    <div className="relative h-screen max-h-screen overflow-hidden text-text selection:bg-action selection:text-on-action flex flex-col font-body">
-      {/* Dynamic 2D Canvas Background */}
+    <div className="relative min-h-screen text-text selection:bg-action selection:text-on-action flex flex-col">
+      {/* 2D Canvas Route Network Background mounted once at root */}
       <RouteNetwork />
 
-      {/* Compact Header Bar */}
-      <header className="shrink-0 z-sticky backdrop-blur-md bg-raised/85 border-b border-border/60 px-4 md:px-8 py-2.5 flex items-center justify-between">
+      {/* Header Bar */}
+      <header className="sticky top-0 z-sticky backdrop-blur-md bg-raised/80 border-b border-border/60 px-space-4 md:px-space-8 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <h1 className="font-display font-bold text-base md:text-lg tracking-wide uppercase">
-            DevOps <span className="text-text-3 font-normal text-xs lowercase font-body">CI/CD Pipeline</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-action animate-pulse" />
+          <h1 className="font-display font-bold text-xl md:text-2xl tracking-wide uppercase">
+            RailRush <span className="text-text-3 font-normal text-sm lowercase font-body">design foundation</span>
           </h1>
-          <span className="hidden sm:inline-block text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-            Self-Hosted Runner
-          </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Button
             size="sm"
             variant="secondary"
             onClick={toggleCalmMode}
-            title="Toggle Canvas Motion"
-            className="py-1 px-2.5 text-xs h-7"
+            title="Toggle Reduced Motion & Ambient Animation"
           >
-            Motion: {calmMode ? 'Calm' : 'Live'}
+            Calm Mode: {calmMode ? 'ON' : 'OFF'}
           </Button>
 
           <Button
             size="sm"
             variant="secondary"
             onClick={toggleTheme}
-            title="Toggle Theme"
-            className="py-1 px-2.5 text-xs h-7"
+            title="Toggle Light / Dark Mode"
           >
-            {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+            {theme === 'dark' ? 'Day Service (Light)' : 'Night Service (Dark)'}
           </Button>
         </div>
       </header>
 
-      {/* Main Single-Screen Content (No Scroll) */}
-      <main className="flex-1 min-h-0 max-w-6xl w-full mx-auto px-4 md:px-8 py-3 flex flex-col justify-between gap-3 z-base">
-        {/* Compact Hero */}
-        <div className="text-center space-y-1">
-          <h2 className="text-2xl md:text-3xl font-display font-black tracking-tight">
-            Automated CI/CD Delivery Pipeline
+      {/* Main Content Showcase */}
+      <main className="flex-1 max-w-[1200px] w-full mx-auto px-4 py-8 space-y-12">
+        {/* Intro Banner */}
+        <section className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-xs uppercase tracking-widest text-text-3 font-semibold">
+              Live System Status
+            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-action animate-pulse" />
+          </div>
+          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">
+            Night-Service Timetable & Reservation System
           </h2>
-          <p className="text-text-2 text-xs md:text-sm max-w-2xl mx-auto line-clamp-2">
-            Continuous deployment workflow orchestrated via GitHub Actions on an Ubuntu Linux runner.
-            Pushes to <code className="text-action font-mono px-1 py-0.2 rounded bg-raised border border-border text-[11px]">main</code> trigger automated build and Nginx configuration reload.
+          <p className="text-text-2 text-base max-w-2xl font-body">
+            Strict token-driven architecture. Canvas 2D ambient network running at 30 FPS behind all screens, pausing during Calm Mode and hidden tabs.
           </p>
-        </div>
+        </section>
 
-        {/* 4 Infrastructure Spec Tiles */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-          {specs.map((item) => (
-            <Card key={item.label} className="p-3 bg-raised/80 backdrop-blur-md border-border/80 flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-text-3 font-semibold block">
-                  {item.label}
-                </span>
-                <span className="text-sm font-bold text-text mt-0.5 block truncate">
-                  {item.val}
-                </span>
-              </div>
-              <span className="text-[10px] text-text-3 border-t border-border/40 pt-1.5 mt-1.5 font-mono block truncate">
-                {item.sub}
-              </span>
-            </Card>
-          ))}
-        </div>
+        {/* Sleeper pattern tick divider */}
+        <div className="tick-divider" />
 
-        {/* Central Pipeline Workflow Container */}
-        <Card className="p-4 md:p-5 bg-raised/85 backdrop-blur-md border-border/80 flex-1 min-h-0 flex flex-col justify-between shadow-float">
-          {/* Workflow Header */}
-          <div className="flex items-center justify-between border-b border-border/50 pb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="font-display font-bold text-sm md:text-base">
-                Workflow Execution Stages
-              </span>
-              <StatusPill status="live" label="Runner Active" />
+        {/* Foundations Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Component Primitives */}
+          <Card className="space-y-6">
+            <div className="border-b border-border/40 pb-3">
+              <h3 className="font-display text-xl font-bold">Button & Action Hierarchy</h3>
+              <p className="text-xs text-text-3">Signal is action, Lantern is reserved confirm</p>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-mono text-text-3 hidden sm:inline">
-                .github/workflows/deploy.yml
-              </span>
-              <span className="text-[10px] font-mono bg-action/10 text-action border border-action/20 px-2 py-0.5 rounded">
-                runs-on: self-hosted
-              </span>
-            </div>
-          </div>
 
-          {/* 4 Pipeline Step Cards in 1 Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 py-1">
-            {stages.map((stage) => (
-              <div
-                key={stage.step}
-                className="p-3 rounded-lg border border-border bg-base/55 flex flex-col justify-between space-y-2 hover:border-action/40 transition-colors"
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button variant="primary">Signal Primary</Button>
+              <Button
+                variant="primary"
+                loading={btnLoading}
+                onClick={() => {
+                  setBtnLoading(true);
+                  setTimeout(() => setBtnLoading(false), 2000);
+                }}
               >
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold text-action bg-action/10 px-1.5 py-0.5 rounded border border-action/20">
-                      STEP {stage.step}
-                    </span>
-                    <span className="text-[10px] font-mono text-text-3">
-                      {stage.tag}
-                    </span>
-                  </div>
-                  <h4 className="font-semibold text-xs text-text">{stage.title}</h4>
-                  <p className="text-[11px] text-text-2 leading-tight">
-                    {stage.detail}
-                  </p>
-                </div>
+                Route Loader Test
+              </Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="lantern">Confirm (Lantern)</Button>
+            </div>
 
-                <div className="p-1.5 rounded bg-black/45 border border-border/60 font-mono text-[10px] text-emerald-400 overflow-hidden whitespace-nowrap text-ellipsis flex items-center gap-1.5">
-                  <span className="text-text-3 select-none">$</span>
-                  <code className="truncate">{stage.cmd}</code>
-                </div>
+            <div className="space-y-4 pt-4 border-t border-border/40">
+              <h4 className="text-sm font-semibold text-text-2">Status Indicators</h4>
+              <div className="flex flex-wrap gap-2">
+                <StatusPill status="live" label="Live Signal" />
+                <StatusPill status="on-time" label="On Time" />
+                <StatusPill status="delayed" label="Delayed 15m" />
+                <StatusPill status="boarding" label="Boarding Plat. 4" />
+                <StatusPill status="cancelled" label="Cancelled" />
               </div>
-            ))}
+            </div>
+
+            <div className="space-y-4 pt-4 border-t border-border/40">
+              <h4 className="text-sm font-semibold text-text-2">Form Controls</h4>
+              <Input
+                label="Train Number or PNR"
+                placeholder="e.g. 12951 or 2419823410"
+                helperText="Plex Mono tabular font used for operational numbers"
+                isDataMono
+              />
+            </div>
+          </Card>
+
+          {/* Timetable / Route Timeline Preview */}
+          <Card className="space-y-6">
+            <div className="border-b border-border/40 pb-3 flex items-center justify-between">
+              <div>
+                <h3 className="font-display text-xl font-bold">
+                  12951 · Rajdhani Express
+                </h3>
+                <p className="text-xs text-text-3 font-data">NDLS ➔ MMCT · TATKAL QUOTA</p>
+              </div>
+              <StatusPill status="live" label="TRACKING" />
+            </div>
+
+            <RouteTimeline
+              stops={[
+                { code: 'NDLS', name: 'New Delhi', time: '16:50', passed: true },
+                { code: 'KOTA', name: 'Kota Junction', time: '21:30', passed: true, haltMinutes: 10 },
+                { code: 'RTM', name: 'Ratlam Junction', time: '01:30', current: true, haltMinutes: 5 },
+                { code: 'BRC', name: 'Vadodara Junction', time: '04:55', haltMinutes: 8 },
+                { code: 'MMCT', name: 'Mumbai Central', time: '08:35' },
+              ]}
+            />
+          </Card>
+        </div>
+
+        {/* Ticket Object Surface Motif */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display text-xl font-bold">Ticket Ivory Motif</h3>
+            <span className="text-xs text-text-3 font-data">Surface Reserved for Boarding Objects</span>
           </div>
 
-          {/* Workflow Summary Strip */}
-          <div className="p-2.5 rounded-lg bg-base/60 border border-border/60 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 text-text-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px]">Push to main triggers end-to-end automated deployment</span>
+          <div className="bg-ticket text-ticket-ink rounded-md p-6 max-w-md shadow-float border border-black/10 relative overflow-hidden">
+            <div className="flex justify-between items-start border-b border-black/15 pb-4">
+              <div>
+                <span className="text-[11px] font-bold tracking-widest uppercase opacity-75">Boarding Pass</span>
+                <div className="font-display font-bold text-2xl tracking-wide">NDLS ➔ MMCT</div>
+              </div>
+              <div className="text-right">
+                <span className="text-[11px] font-bold tracking-widest uppercase opacity-75">Train No.</span>
+                <div className="font-data font-bold text-lg">12951</div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-3">
-              <span>Target:</span>
-              <span className="text-text font-semibold">/var/www/railrush/</span>
+
+            <div className="grid grid-cols-3 gap-4 pt-4 text-xs">
+              <div>
+                <span className="block opacity-60 uppercase text-[10px] font-semibold">Coach / Seat</span>
+                <span className="font-data font-bold text-base">B2 · 34 (LB)</span>
+              </div>
+              <div>
+                <span className="block opacity-60 uppercase text-[10px] font-semibold">Class</span>
+                <span className="font-bold text-base">3A</span>
+              </div>
+              <div>
+                <span className="block opacity-60 uppercase text-[10px] font-semibold">Fare</span>
+                <span className="font-data font-bold text-base">₹2,485</span>
+              </div>
             </div>
           </div>
-        </Card>
+        </section>
       </main>
 
-      {/* Minimal Footer */}
-      <footer className="shrink-0 z-base border-t border-border/40 py-2 px-4 text-center text-[10px] text-text-3 font-mono">
-        Self-Hosted Runner Deployment Showcase · Ubuntu Linux · Nginx
+      {/* Footer */}
+      <footer className="border-t border-border/50 py-4 px-6 text-center text-xs text-text-3 font-data">
+        RailRush System Design Foundation · Night-Service Architecture Active
       </footer>
     </div>
   );
