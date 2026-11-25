@@ -41,22 +41,19 @@ jobs:
     needs: docker-build-push
 
     steps:
-      - name: Pull latest code
+      - name: Stop and remove existing container
         run: |
-          cd /home/ubuntu/RailRush
-          git pull
+          docker stop railrush-container || true
+          docker rm railrush-container || true
 
-      - name: Install dependencies
+      - name: Pull latest image from Docker Hub
         run: |
-          cd /home/ubuntu/RailRush/frontend
-          npm ci
+          docker pull ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
 
-      - name: Build frontend
+      - name: Run updated container
         run: |
-          cd /home/ubuntu/RailRush/frontend
-          npm run build
+          docker run -d -p 8080:80 --name railrush-container ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
 
-      - name: Deploy to Nginx
+      - name: Clean up unused Docker images
         run: |
-          sudo cp -r /home/ubuntu/RailRush/frontend/dist/. /var/www/railrush/
-          sudo systemctl reload nginx
+          docker image prune -f
