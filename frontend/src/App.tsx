@@ -23,7 +23,7 @@ export const App: React.FC = () => {
         <div className="flex items-center gap-3">
           <span className="w-2.5 h-2.5 rounded-full bg-action animate-pulse" />
           <h1 className="font-display font-bold text-xl md:text-2xl tracking-wide uppercase">
-            RailRush <span className="text-text-3 font-normal text-sm lowercase font-body">design foundation</span>
+            RailRush <span className="text-text-3 font-normal text-sm lowercase font-body">v1.1</span>
           </h1>
         </div>
 
