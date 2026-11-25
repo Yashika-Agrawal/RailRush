@@ -52,7 +52,7 @@ jobs:
 
       - name: Run updated container
         run: |
-          docker run -d -p 8080:80 --name railrush-container ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
+          docker run -d -p 80:80 --name railrush-container ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
 
       - name: Clean up unused Docker images
         run: |
