@@ -43,7 +43,7 @@ export const App: React.FC = () => {
             onClick={toggleTheme}
             title="Toggle Light / Dark Mode"
           >
-            {theme === 'dark' ? 'Day Service (Light)' : 'Night Service (Dark)'}
+            {theme === 'dark' ? 'Light' : 'Dark'}
           </Button>
         </div>
       </header>
