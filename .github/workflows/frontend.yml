@@ -32,7 +32,9 @@ jobs:
           file: ./frontend/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
+          tags: |
+            ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
+            ${{ vars.DOCKERHUB_USERNAME }}/railrush:1.0
 
   deploy:
     runs-on: self-hosted
