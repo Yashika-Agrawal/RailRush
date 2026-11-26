@@ -1,0 +1,29 @@
+services:
+  frontend:
+    image: yashika292002/railrush:latest
+    restart: always
+    networks:
+      - internal-net
+
+  caddy:
+    image: caddy:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal-net
+    depends_on:
+      - frontend
+
+networks:
+  internal-net:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

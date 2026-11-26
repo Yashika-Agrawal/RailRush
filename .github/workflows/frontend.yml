@@ -41,19 +41,19 @@ jobs:
     needs: docker-build-push
 
     steps:
-      - name: Stop and remove existing container
+      - name: Pull latest code (docker-compose & Caddyfile)
         run: |
-          docker stop railrush-container || true
-          docker rm railrush-container || true
-
-      - name: Pull latest image from Docker Hub
+          cd /home/ubuntu/RailRush
+          git pull
+      - name: Pull latest Docker images
         run: |
-          docker pull ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
-
-      - name: Run updated container
+          cd /home/ubuntu/RailRush/frontend
+          docker compose pull
+      - name: Deploy updated services with Docker Compose
         run: |
-          docker run -d -p 80:80 --name railrush-container ${{ vars.DOCKERHUB_USERNAME }}/railrush:latest
-
+          cd /home/ubuntu/RailRush/frontend
+          docker compose up -d
       - name: Clean up unused Docker images
         run: |
           docker image prune -f
+        
