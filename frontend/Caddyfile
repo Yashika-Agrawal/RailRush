@@ -1,3 +1,4 @@
-http://railrush-dev.duckdns.org {
+railrush-dev.duckdns.org {
+    tls internal
     reverse_proxy frontend:80
 }
